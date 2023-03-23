@@ -41,23 +41,34 @@ AgreeConf.A <- factor(Mindset_aa$Conf.A, levels = c("Strongly agree", "Somewhat 
 
 ####create plots for farmers' responses to these 3 questions about change in mindset
 
-ggplot(data=Mindset_f, mapping = aes(x = AgreeRisk.F)) +
+ggplot(data=Mindset_f, mapping = aes(x = AgreeRisk.F, fill=AgreeRisk.F)) +
   geom_bar() +
   labs(x = " ",
        y = "Farmers") +
   scale_x_discrete(drop = FALSE) + #show levels with empty data to make charts consistent
+  ylim(0, 11) + #make y-axis the same for all charts to show differences
+  scale_fill_brewer(direction = -1) + #add color, fill specified in aes
+  theme(legend.position = "none") + #take out legend, unnecessary
   ggtitle("Hearing other CAF farmer participants discuss climate risks faced on their farms\nmade me think about climate risks that I face in a new way")
 
-ggplot(data=Mindset_f, mapping = aes(x = AgreeAdapt.F)) +
+ggplot(data=Mindset_f, mapping = aes(x = AgreeAdapt.F, fill=AgreeAdapt.F)) +
   geom_bar() +
   labs(x = " ",
        y = "Farmers") +
   scale_x_discrete(drop = FALSE) +
+  ylim(0, 11) +
+  scale_fill_brewer(direction = -1) + 
+  theme(legend.position = "none") + 
   ggtitle("Hearing other CAF farmer participants discuss climate adaptations used on their farms \nmade me think about climate adaptations that I could use in a new way")
 
-ggplot(data=Mindset_f, mapping = aes(x = AgreeConf.F)) +
+ggplot(data=Mindset_f, mapping = aes(x = AgreeConf.F, fill=AgreeConf.F)) +
   geom_bar() +
   labs(x = " ",
        y = "Farmers") +
+  ylim(0, 11) +
+  scale_fill_brewer(direction = -1) + 
+  theme(legend.position = "none") + 
   scale_x_discrete(drop = FALSE, guide = guide_axis(n.dodge=3)) + #avoid overlapping x-labels due to more missing data
   ggtitle("Since beginning the CAF program, my confidence in addressing climate change \non my farm has increased")
+
+####create plots for farmers' responses to these 3 questions about change in mindset
