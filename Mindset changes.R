@@ -27,17 +27,37 @@ Mindset <-
   rename("Conf.A" ="wkshp2.Q4.10") %>%
   cbind(NAME = Mindset[,1], .) 
 
-####take out NAs
+####create databases for farmers and advisors by taking out the NAs from columns
 Mindset_f <- filter(Mindset, !is.na(RisksNW.F))
 Mindset_aa <- filter(Mindset, !is.na(RisksNW.A))
 
-
-
 ####set the levels for the variables so they appear correctly in the plots. 
-#Only writing the levels that were given as responses for each Q.  
-#AgreeRisk <- factor(filteredMD$RisksNW.A, levels = c("Strongly agree", "Somewhat agree", "Strongly disagree", "NA"))
-#AgreeAdapt <- factor(filteredMD$AdaptNW.A, levels = c("Strongly agree", "Somewhat agree", "Strongly disagree", "NA"))
-#AgreeConf <- factor(filteredMD$Conf.A, levels = c("Strongly agree", "Somewhat agree", "Strongly disagree", "NA"))
-#AgreeRisk.F <- factor(removeNA.MD.F$RisksNW.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
-#AgreeAdapt.F <- factor(removeNA.MD.F$AdaptNW.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
-#AgreeConf.F <- factor(removeNA.MD.F.Conf$Conf.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+AgreeRisk.F <- factor(Mindset_f$RisksNW.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+AgreeAdapt.F <- factor(Mindset_f$AdaptNW.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+AgreeConf.F <- factor(Mindset_f$Conf.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+AgreeRisk.A <- factor(Mindset_aa$RisksNW.A, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+AgreeAdapt.A <- factor(Mindset_aa$AdaptNW.A, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+AgreeConf.A <- factor(Mindset_aa$Conf.A, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+
+####create plots for farmers' responses to these 3 questions about change in mindset
+
+ggplot(data=Mindset_f, mapping = aes(x = AgreeRisk.F)) +
+  geom_bar() +
+  labs(x = " ",
+       y = "Farmers") +
+  scale_x_discrete(drop = FALSE) + #show levels with empty data to make charts consistent
+  ggtitle("Hearing other CAF farmer participants discuss climate risks faced on their farms\nmade me think about climate risks that I face in a new way")
+
+ggplot(data=Mindset_f, mapping = aes(x = AgreeAdapt.F)) +
+  geom_bar() +
+  labs(x = " ",
+       y = "Farmers") +
+  scale_x_discrete(drop = FALSE) +
+  ggtitle("Hearing other CAF farmer participants discuss climate adaptations used on their farms \nmade me think about climate adaptations that I could use in a new way")
+
+ggplot(data=Mindset_f, mapping = aes(x = AgreeConf.F)) +
+  geom_bar() +
+  labs(x = " ",
+       y = "Farmers") +
+  scale_x_discrete(drop = FALSE, guide = guide_axis(n.dodge=3)) + #avoid overlapping x-labels due to more missing data
+  ggtitle("Since beginning the CAF program, my confidence in addressing climate change \non my farm has increased")
