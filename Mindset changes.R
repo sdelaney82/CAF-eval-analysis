@@ -26,3 +26,18 @@ Mindset <-
   rename("Conf.F" ="wkshp2.Q4.6") %>%
   rename("Conf.A" ="wkshp2.Q4.10") %>%
   cbind(NAME = Mindset[,1], .) 
+
+####take out NAs
+Mindset_f <- filter(Mindset, !is.na(RisksNW.F))
+Mindset_aa <- filter(Mindset, !is.na(RisksNW.A))
+
+
+
+####set the levels for the variables so they appear correctly in the plots. 
+#Only writing the levels that were given as responses for each Q.  
+#AgreeRisk <- factor(filteredMD$RisksNW.A, levels = c("Strongly agree", "Somewhat agree", "Strongly disagree", "NA"))
+#AgreeAdapt <- factor(filteredMD$AdaptNW.A, levels = c("Strongly agree", "Somewhat agree", "Strongly disagree", "NA"))
+#AgreeConf <- factor(filteredMD$Conf.A, levels = c("Strongly agree", "Somewhat agree", "Strongly disagree", "NA"))
+#AgreeRisk.F <- factor(removeNA.MD.F$RisksNW.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+#AgreeAdapt.F <- factor(removeNA.MD.F$AdaptNW.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
+#AgreeConf.F <- factor(removeNA.MD.F.Conf$Conf.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
