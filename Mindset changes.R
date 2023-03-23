@@ -41,16 +41,18 @@ AgreeConf.A <- factor(Mindset_aa$Conf.A, levels = c("Strongly agree", "Somewhat 
 
 ####create plots for farmers' responses to these 3 questions about change in mindset
 
-ggplot(data=Mindset_f, mapping = aes(x = AgreeRisk.F, fill=AgreeRisk.F)) +
+plot_AgreeRisk.F <- 
+  ggplot(data=Mindset_f, mapping = aes(x = AgreeRisk.F, fill=AgreeRisk.F)) +
   geom_bar() +
   labs(x = " ",
        y = "Farmers") +
   scale_x_discrete(drop = FALSE) + #show levels with empty data to make charts consistent
   ylim(0, 11) + #make y-axis the same for all charts to show differences
   scale_fill_brewer(direction = -1) + #add color, fill specified in aes
-  theme(legend.position = "none") + #take out legend, unnecessary
+  theme(legend.position = "none", plot.title=element_text(size=12), axis.text=element_text(size=8)) + #take out legend, unnecessary
   ggtitle("Hearing other CAF farmer participants discuss climate risks faced on their farms\nmade me think about climate risks that I face in a new way")
 
+plot_AgreeAdapt.F <- 
 ggplot(data=Mindset_f, mapping = aes(x = AgreeAdapt.F, fill=AgreeAdapt.F)) +
   geom_bar() +
   labs(x = " ",
@@ -61,6 +63,7 @@ ggplot(data=Mindset_f, mapping = aes(x = AgreeAdapt.F, fill=AgreeAdapt.F)) +
   theme(legend.position = "none") + 
   ggtitle("Hearing other CAF farmer participants discuss climate adaptations used on their farms \nmade me think about climate adaptations that I could use in a new way")
 
+plot_AgreeConf.F <- 
 ggplot(data=Mindset_f, mapping = aes(x = AgreeConf.F, fill=AgreeConf.F)) +
   geom_bar() +
   labs(x = " ",
@@ -73,6 +76,7 @@ ggplot(data=Mindset_f, mapping = aes(x = AgreeConf.F, fill=AgreeConf.F)) +
 
 ####create plots for advisors' responses to these 3 questions about change in mindset
 
+plot_AgreeRisk.A<- 
 ggplot(data=Mindset_aa, mapping = aes(x = AgreeRisk.A, fill=AgreeRisk.A)) +
   geom_bar() +
   labs(x = " ",
@@ -83,6 +87,7 @@ ggplot(data=Mindset_aa, mapping = aes(x = AgreeRisk.A, fill=AgreeRisk.A)) +
   theme(legend.position = "none") + #take out legend, unnecessary
   ggtitle("Hearing other CAF agricultural advisor participants discuss climate risks helped \nme think about how to address these climate risks in my programs in a new way")
 
+plot_AgreeAdapt.A <- 
 ggplot(data=Mindset_aa, mapping = aes(x = AgreeAdapt.A, fill=AgreeAdapt.A)) +
   geom_bar() +
   labs(x = " ",
@@ -93,6 +98,7 @@ ggplot(data=Mindset_aa, mapping = aes(x = AgreeAdapt.A, fill=AgreeAdapt.A)) +
   theme(legend.position = "none") + 
   ggtitle("Hearing CAF participants discuss climate adaptations helped me think about \nhow to address these climate adaptations in my programs in a new way")
 
+plot_AgreeConf.A <- 
 ggplot(data=Mindset_aa, mapping = aes(x = AgreeConf.A, fill=AgreeConf.A)) +
   geom_bar() +
   labs(x = " ",
@@ -102,3 +108,8 @@ ggplot(data=Mindset_aa, mapping = aes(x = AgreeConf.A, fill=AgreeConf.A)) +
   theme(legend.position = "none") + 
   scale_x_discrete(drop = FALSE, guide = guide_axis(n.dodge=3)) + #avoid overlapping x-labels due to more missing data
   ggtitle("Since beginning the CAF program, my confidence in incorporating \nclimate change issues into my programing has increased")
+
+#can use plot_grid to display multiple plots on a grid, need cowplot library
+#need to make new versions of the plots that don't have long titles for it to work?
+library(cowplot)
+plot_grid(plot_AgreeRisk.F, plot_AgreeAdapt.F, plot_AgreeConf.F, nrow=1, ncol=3)
