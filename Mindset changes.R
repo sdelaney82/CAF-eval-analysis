@@ -71,4 +71,34 @@ ggplot(data=Mindset_f, mapping = aes(x = AgreeConf.F, fill=AgreeConf.F)) +
   scale_x_discrete(drop = FALSE, guide = guide_axis(n.dodge=3)) + #avoid overlapping x-labels due to more missing data
   ggtitle("Since beginning the CAF program, my confidence in addressing climate change \non my farm has increased")
 
-####create plots for farmers' responses to these 3 questions about change in mindset
+####create plots for advisors' responses to these 3 questions about change in mindset
+
+ggplot(data=Mindset_aa, mapping = aes(x = AgreeRisk.A, fill=AgreeRisk.A)) +
+  geom_bar() +
+  labs(x = " ",
+       y = "Advisors") +
+  scale_x_discrete(drop = FALSE) + #show levels with empty data to make charts consistent
+  ylim(0, 11) + #make y-axis the same for all charts to show differences
+  scale_fill_brewer(direction = -1) + #add color, fill specified in aes
+  theme(legend.position = "none") + #take out legend, unnecessary
+  ggtitle("Hearing other CAF agricultural advisor participants discuss climate risks helped \nme think about how to address these climate risks in my programs in a new way")
+
+ggplot(data=Mindset_aa, mapping = aes(x = AgreeAdapt.A, fill=AgreeAdapt.A)) +
+  geom_bar() +
+  labs(x = " ",
+       y = "Advisors") +
+  scale_x_discrete(drop = FALSE) +
+  ylim(0, 11) +
+  scale_fill_brewer(direction = -1) + 
+  theme(legend.position = "none") + 
+  ggtitle("Hearing CAF participants discuss climate adaptations helped me think about \nhow to address these climate adaptations in my programs in a new way")
+
+ggplot(data=Mindset_aa, mapping = aes(x = AgreeConf.A, fill=AgreeConf.A)) +
+  geom_bar() +
+  labs(x = " ",
+       y = "Advisors") +
+  ylim(0, 11) +
+  scale_fill_brewer(direction = -1) + 
+  theme(legend.position = "none") + 
+  scale_x_discrete(drop = FALSE, guide = guide_axis(n.dodge=3)) + #avoid overlapping x-labels due to more missing data
+  ggtitle("Since beginning the CAF program, my confidence in incorporating \nclimate change issues into my programing has increased")
