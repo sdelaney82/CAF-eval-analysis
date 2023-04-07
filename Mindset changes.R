@@ -73,6 +73,7 @@ ggplot(data=Mindset_f, mapping = aes(x = AgreeAdapt.F, fill=AgreeAdapt.F)) +
 
 ####create plots for advisors' responses to these 3 questions about change in mindset
 
+#note I am not assigning these plots to a variable at this point
 ggplot(data=Mindset_aa, mapping = aes(x = AgreeRisk.A, fill=AgreeRisk.A)) +
   geom_bar() +
   labs(x = " ",

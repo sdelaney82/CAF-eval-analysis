@@ -1,8 +1,10 @@
 #modify plots to make them viewable as one grid
 #can use plot_grid to display multiple plots on a grid, need cowplot library
 #need to make new versions of the plots that don't have long titles for it to work?
+
 ####create plots for farmers' responses to these 3 questions about change in mindset
 
+#assigning the plots of a variable now so I can call those variables to make a grid
 plot_AgreeRisk.F <- 
   ggplot(data=Mindset_f, mapping = aes(x = AgreeRisk.F, fill=AgreeRisk.F)) +
   geom_bar() +
@@ -11,9 +13,9 @@ plot_AgreeRisk.F <-
   scale_x_discrete(drop = FALSE) + #show levels with empty data to make charts consistent
   ylim(0, 11) + #make y-axis the same for all charts to show differences
   scale_fill_brewer(direction = -1, drop = FALSE) + #add color, fill specified in aes
-  theme(legend.position = "right", plot.title=element_text(size=12), axis.text=element_text(size=8), 
-        axis.text.x=element_blank(), axis.ticks.x=element_blank()) + #take out legend, unnecessary
-  ggtitle("think about climate risks I face in a new way")
+  theme(legend.position = "right", plot.title=element_text(size=11), axis.text=element_text(size=8), 
+        axis.text.x=element_blank(), axis.ticks.x=element_blank()) + #use legend in this one plot for entire grid
+  ggtitle("think about climate risks I face \nin a new way")
 
 plot_AgreeAdapt.F <- 
   ggplot(data=Mindset_f, mapping = aes(x = AgreeAdapt.F, fill=AgreeAdapt.F)) +
@@ -23,7 +25,7 @@ plot_AgreeAdapt.F <-
   scale_x_discrete(drop = FALSE) +
   ylim(0, 11) +
   scale_fill_brewer(direction = -1, drop = FALSE) + 
-  theme(legend.position = "none", plot.title=element_text(size=12), axis.text=element_text(size=8), 
+  theme(legend.position = "none", plot.title=element_text(size=11), axis.text=element_text(size=8), 
         axis.text.x=element_blank(), axis.ticks.x=element_blank()) + 
   ggtitle("think about climate adaptations I could \nuse in a new way")
 
@@ -34,10 +36,10 @@ plot_AgreeConf.F <-
        y = "Farmers") +
   ylim(0, 11) +
   scale_fill_brewer(direction = -1, drop = FALSE) + 
-  theme(legend.position = "none", plot.title=element_text(size=12), axis.text=element_text(size=8), 
+  theme(legend.position = "none", plot.title=element_text(size=11), axis.text=element_text(size=8), 
         axis.text.x=element_blank(), axis.ticks.x=element_blank()) + 
   scale_x_discrete(drop = FALSE, guide = guide_axis(n.dodge=3)) + #avoid overlapping x-labels due to more missing data
-  ggtitle("increased confidence to address climate change \non my farm")
+  ggtitle("increased confidence to address \nclimate change on my farm")
 
 ####create plots for advisors' responses to these 3 questions about change in mindset
 
@@ -49,7 +51,7 @@ plot_AgreeRisk.A<-
   scale_x_discrete(drop = FALSE) + #show levels with empty data to make charts consistent
   ylim(0, 11) + #make y-axis the same for all charts to show differences
   scale_fill_brewer(direction = -1, drop = FALSE) + #add color, fill specified in aes
-  theme(legend.position = "none", plot.title=element_text(size=12), axis.text=element_text(size=8), 
+  theme(legend.position = "none", plot.title=element_text(size=11), axis.text=element_text(size=8), 
         axis.text.x=element_blank(), axis.ticks.x=element_blank()) + #take out legend, unnecessary
   ggtitle("think about how to address climate risks \nin my programs in a new way")
 
@@ -61,7 +63,7 @@ plot_AgreeAdapt.A <-
   scale_x_discrete(drop = FALSE) +
   ylim(0, 11) +
   scale_fill_brewer(direction = -1, drop = FALSE) + 
-  theme(legend.position = "none", plot.title=element_text(size=12), axis.text=element_text(size=8), 
+  theme(legend.position = "none", plot.title=element_text(size=11), axis.text=element_text(size=8), 
         axis.text.x=element_blank(), axis.ticks.x=element_blank()) + 
   ggtitle("think about how to address climate \nadaptations in my programs in a new way")
 
@@ -72,7 +74,7 @@ plot_AgreeConf.A <-
        y = "Advisors") +
   ylim(0, 11) +
   scale_fill_brewer(direction = -1, drop = FALSE) + 
-  theme(legend.position = "none", plot.title=element_text(size=12), axis.text=element_text(size=8), 
+  theme(legend.position = "none", plot.title=element_text(size=11), axis.text=element_text(size=8), 
         axis.text.x=element_blank(), axis.ticks.x=element_blank()) + 
   scale_x_discrete(drop = FALSE, guide = guide_axis(n.dodge=3)) + #avoid overlapping x-labels due to more missing data
   ggtitle("increased confidence to incorporate climate \nissues into my programs")
