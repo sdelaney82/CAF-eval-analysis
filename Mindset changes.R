@@ -27,9 +27,13 @@ Mindset <-
   rename("Conf.A" ="wkshp2.Q4.10") %>%
   cbind(NAME = Mindset[,1], .) 
 
-####create databases for farmers and advisors by taking out the NAs from columns
+####create databases for farmers and advisors by taking out the NAs from columns, so only shows
+####farmer rows or advisor rows respectively
 Mindset_f <- filter(Mindset, !is.na(RisksNW.F))
 Mindset_aa <- filter(Mindset, !is.na(RisksNW.A))
+
+Mindset_f <- Mindset_f[, c(1,2,4,6)]
+Mindset_aa <- Mindset_aa[, c(1,3,5,7)]
 
 ####set the levels for the variables so they appear correctly in the plots. 
 AgreeRisk.F <- factor(Mindset_f$RisksNW.F, levels = c("Strongly agree", "Somewhat agree", "Neither agree nor disagree", "Somewhat disagree", "Strongly disagree"))
