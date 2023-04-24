@@ -1,46 +1,41 @@
-#app.Q19  Please complete the following statement. "I am confident in our ability to adapt to a changing climate" ####
-TappQ20.13 <- COMBOdata %>%
-  group_by(app.Q20.13) %>%
-  summarize(n = n(), Statement = "2020 Application \n(our ability to adapt)")%>%  
-  drop_na() %>%
-  mutate(perc = round(n/sum(n)*100, 0))%>%
-  rename(Response = app.Q20.13)
+#  I am confident in my ability, as an agricultural advisor, to integrate climate change into my programing
 
-# In 2021 workshop evaluation data, Q31.1  "I am confident in northeast agriculture's ability to adapt to a changing climate"  ####
-TW1_Q31.1 <- COMBOdata %>%
-  group_by(wkshp1.Q31.1) %>%
+#no similar question in application
+
+# In 2021 workshop evaluation data, Q31.2  " I am confident in my ability, as an agricultural advisor, to integrate climate change into my programing"  ####
+TW1_Q31.3 <- COMBOdata%>%
+  group_by(wkshp1.Q31.3)%>%
   summarize(n = n(), Statement = "2021 post-workshop")%>%  
   drop_na() %>%
   mutate(perc = round(n/sum(n)*100, 0))%>%
-  rename(Response = wkshp1.Q31.1) 
+  rename(Response = wkshp1.Q31.3) 
 
-# In 2022 workshop evaluation data, Q2.1.1  I am confident in northeast agriculture's ability to adapt to a changing climate ####
-TW2_21.1 <- COMBOdata %>%
-  group_by(wkshp2.Q2.1.1) %>%
+# In 2022 workshop evaluation data, Q2.1.1 ####
+TW2_21.3 <- COMBOdata %>%
+  group_by(wkshp2.Q2.1.3) %>%
   summarize(n = n(), Statement = "2022 post-workshop")%>%  
   drop_na() %>%
   mutate(perc = round(n/sum(n)*100, 0))%>%
-  rename(Response = wkshp2.Q2.1.1) 
+  rename(Response = wkshp2.Q2.1.3) 
 
 #add in 2023 survey!
-TS1_Q2.1_1 <- CAF2023data %>%
-  group_by(Q2.1_1) %>%
+TS1_Q2.1_3 <- CAF2023data %>%
+  group_by(Q2.1_3) %>%
   summarize(n = n(), Statement = "2023 1-yr post-CAF")%>%  
   drop_na() %>%
   mutate(perc = round(n/sum(n)*100, 0))%>%
-  rename(Response = Q2.1_1) 
+  rename(Response = Q2.1_3) 
 
 #Join dataframes #### 
-NEagadapt_combo <- rbind(TappQ20.13,
-                            TW1_Q31.1,
-                            TW2_21.1, TS1_Q2.1_1)
+AAintegrate_combo <- rbind(TW1_Q31.3,
+                           TW2_21.3, TS1_Q2.1_3)
 
-NEagadapt_combo$Statement <- factor(NEagadapt_combo$Statement, levels=c("2023 1-yr post-CAF", "2022 post-workshop", "2021 post-workshop","2020 Application \n(our ability to adapt)"))
+AAintegrate_combo$Statement <- factor(AAintegrate_combo$Statement, levels=c("2023 1-yr post-CAF", "2022 post-workshop", "2021 post-workshop"))
 
-as.tibble(NEagadapt_combo)
+as.tibble(AAintegrate_combo)
 
 # STEP 3: Create stacked bar chart ####
-NEagadapt_plot <- ggplot(NEagadapt_combo, aes(             
+AAinegrate_plot <- ggplot(AAintegrate_combo, aes(             
   x = Statement,                             # ID data frame column for X axis
   y = perc,  # ID data frame column for Y axis
   fill = factor(                             
@@ -65,17 +60,17 @@ NEagadapt_plot <- ggplot(NEagadapt_combo, aes(
     color = 'black'                          # label text color
   ) +
   scale_x_discrete(drop = FALSE) + #show levels with empty data to make charts consistent
-  scale_fill_brewer(palette = "BrBG", direction = -1, drop=FALSE) +      # set bar color scheme
+  scale_fill_brewer(palette = "BrBG", direction = -1, drop = FALSE) +      # set bar color scheme
   #facet_grid( ~ Statement) +                 # ID data from column if more than one facet
   coord_flip() +
   labs(
     y = "percent of respondents",
     fill = "",
     x = "",
-    title = "CAF Fellow agreement with statement: 'I am confident in northeast agriculture's ability to adapt to a changing climate'"
+    title = "CAF Fellow agreement with statement: 'I am confident in my ability, as an agricultural advisor, to integrate climate change into my programing'"
   ) +
   guides(fill = guide_legend(reverse = TRUE))+
   #theme(axis.text.x = element_text(angle = 45)) +
   theme(legend.position = "bottom") 
 
-NEagadapt_plot
+AAinegrate_plot

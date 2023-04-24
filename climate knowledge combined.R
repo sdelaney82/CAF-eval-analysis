@@ -40,8 +40,8 @@ TappQ19rev$Response <- factor(TappQ19rev$Response, levels = c("Strongly agree","
 as.tibble(TappQ19rev)
 
 #trying again, manually making a new df
-TappQ19revA <- data.frame(Response=c("Strongly agree","Somewhat agree","Neutral","Somewhat disagree"), Statement=c("2020 Application", "2020 Application","2020 Application", "2020 Application"),
-n=c(8,22,3,1), perc=c(24,65,9,3))
+TappQ19revA <- data.frame(Response=c("Strongly agree","Somewhat agree","Neutral","Somewhat disagree","Strongly disagree"), Statement=c("2020 Application", "2020 Application", "2020 Application","2020 Application", "2020 Application"),
+n=c(8,22,3,1,0), perc=c(24,65,9,3,0))
 
 # In 2021 workshop evaluation data, Q31.10  I consider myself to be knowledgeable about climate change ####
 TW1_Q31.10 <- COMBOdata %>%
@@ -82,6 +82,7 @@ knowledge_cc_plot <- ggplot(knowledge_CC_combo, aes(
   y = perc,  # ID data frame column for Y axis
   fill = factor(                             
     Response,                                # ID data frame column for fill (bars)
+    
     levels = c("Strongly agree",                 # set string values in manual order
                "Somewhat agree",
                "Neutral",
@@ -101,7 +102,8 @@ knowledge_cc_plot <- ggplot(knowledge_CC_combo, aes(
     size = 4,                                # label text size
     color = 'black'                          # label text color
   ) +
-  scale_fill_brewer(palette = "BrBG", direction = -1) +      # set bar color scheme
+  scale_x_discrete(drop = FALSE) + #show levels with empty data to make charts consistent
+  scale_fill_brewer(palette = "BrBG", direction = -1, drop = FALSE) +      # set bar color scheme, green as agree, show levels with empty data
   #facet_grid( ~ Statement) +                 # ID data from column if more than one facet
   coord_flip() +
   labs(
