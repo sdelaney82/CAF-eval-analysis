@@ -11,7 +11,7 @@ TW1_Q31.2 <- COMBOdata%>%
   rename(Response = wkshp1.Q31.2) 
 
 # In 2022 workshop evaluation data, Q2.1.1  I am confident in my ability, as a farmer, to adapt to climate change in my operation ####
-TW2_21.2 <- COMBOdata %>%
+TW2_2.1.2 <- COMBOdata %>%
   group_by(wkshp2.Q2.1.2) %>%
   summarize(n = n(), Statement = "2022 post-workshop")%>%  
   drop_na() %>%

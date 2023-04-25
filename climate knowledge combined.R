@@ -12,6 +12,10 @@ CAF2023data<- read.csv("~/R/CAF-eval-analysis/CAF_2023.csv",
                       header=TRUE, sep = ",", na.strings=c("", "NA"))
 CAF2023data <- CAF2023data[-c(1,2),]
 
+CAF2023data <- CAF2023data %>%
+  rename(NAME = Q1.3_4)
+
+
 #app.Q19  Please complete the following statement. "I consider myself to be..." ####
 TappQ19 <- COMBOdata %>%
   group_by(app.Q19) %>%
@@ -19,6 +23,8 @@ TappQ19 <- COMBOdata %>%
   drop_na() %>%
   mutate(perc = round(n/sum(n)*100, 0))%>%
   rename(Response = app.Q19)
+
+Q1.3_4
 
 #modify the responses in the application data to match those in the evaluation data. Could not figure out how to do it in one argument,
 #but this works. 
